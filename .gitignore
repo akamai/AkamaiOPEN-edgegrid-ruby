@@ -1,0 +1,7 @@
+*~
+*.gem
+coverage/
+Gemfile.lock
+html/
+.ruby-version
+.ruby-gemset
