@@ -101,11 +101,14 @@ module Akamai #:nodoc:
       # Returns a hash of the HTTP POST body
       def make_content_hash(request) 
         if request.method == 'POST' and request.body_exist? and request.body.length > 0
-          if request.body.length > @max_body
-            raise "body is too large.  max_body=#{@max_body}"
+          body = request.body
+          if body.length > @max_body
+            @log.debug("data length #{body.length} is larger than maximum #{@max_body}")
+            body = body[0..@max_body-1]
+            @log.debug("data truncated to #{body.length} for computing the hash")
           end
 
-          return self.class.base64_sha256(request.body)
+          return self.class.base64_sha256(body)
         end
         return ""
       end
@@ -154,7 +157,7 @@ module Akamai #:nodoc:
       # * +:client_secret+ - Client Secret from "Credentials" Manage API UI
       # * +:access_token+ - Access Token from "Authorizations" Manage API UI
       # * +:headers_to_sign+ - List of headers (in order) that will be signed. This info is provided by individual APIs (default [])
-      # * +:max_body+ - Maximum POST body size accepted.  This info is provided by individual APIs (default 2048)
+      # * +:max_body+ - Maximum POST body size accepted.  This info is provided by individual APIs (default 128k)
       # * +:debug+ - Enable extra logging (default 'false')
       def setup_edgegrid(opts)
         @client_token = opts[:client_token]
@@ -165,7 +168,7 @@ module Akamai #:nodoc:
         @headers_to_sign ||= []
 
         @max_body = opts[:max_body]
-        @max_body ||= 2048
+        @max_body ||= 128*1024
 
         if opts[:debug]
           @log = Logger.new(STDERR)
