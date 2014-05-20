@@ -157,7 +157,7 @@ module Akamai #:nodoc:
       # * +:client_secret+ - Client Secret from "Credentials" Manage API UI
       # * +:access_token+ - Access Token from "Authorizations" Manage API UI
       # * +:headers_to_sign+ - List of headers (in order) that will be signed. This info is provided by individual APIs (default [])
-      # * +:max_body+ - Maximum POST body size accepted.  This info is provided by individual APIs (default 128k)
+      # * +:max_body+ - Maximum POST body size accepted.  This info is provided by individual APIs (default 2048)
       # * +:debug+ - Enable extra logging (default 'false')
       def setup_edgegrid(opts)
         @client_token = opts[:client_token]
@@ -168,7 +168,7 @@ module Akamai #:nodoc:
         @headers_to_sign ||= []
 
         @max_body = opts[:max_body]
-        @max_body ||= 128*1024
+        @max_body ||= 2048
 
         if opts[:debug]
           @log = Logger.new(STDERR)
