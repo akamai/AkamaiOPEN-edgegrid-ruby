@@ -101,11 +101,14 @@ module Akamai #:nodoc:
       # Returns a hash of the HTTP POST body
       def make_content_hash(request) 
         if request.method == 'POST' and request.body_exist? and request.body.length > 0
-          if request.body.length > @max_body
-            raise "body is too large.  max_body=#{@max_body}"
+          body = request.body
+          if body.length > @max_body
+            @log.debug("data length #{body.length} is larger than maximum #{@max_body}")
+            body = body[0..@max_body-1]
+            @log.debug("data truncated to #{body.length} for computing the hash")
           end
 
-          return self.class.base64_sha256(request.body)
+          return self.class.base64_sha256(body)
         end
         return ""
       end
