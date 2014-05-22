@@ -49,9 +49,9 @@ http = Akamai::Edgegrid::HTTP.new(
 )
 
 http.setup_edgegrid(
-    :client_token => 'akab-ccccccccccccccc',
+    :client_token => 'ccccccccccccccc',
     :client_secret => 'sssssssssssssssssssssss',
-    :access_token => 'akab-aaaaaaaaaaaaaaaaaaaa'
+    :access_token => 'aaaaaaaaaaaaaaaaaaaa'
 )
 
 request = Net::HTTP::Get.new URI.join(baseuri.to_s, '/diagnostic-tools/v1/locations').to_s

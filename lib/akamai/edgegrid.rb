@@ -46,9 +46,9 @@ module Akamai #:nodoc:
     #   >> baseuri = URI('https://akaa-xxxxxxxxxxxx.luna.akamaiapis.net/')
     #   >> http = Akamai::Edgegrid::HTTP.new(address, port)
     #   >> http.setup_edgegrid(
-    #         :client_token => 'akab-ccccccccc',
+    #         :client_token => 'ccccccccc',
     #         :client_secret => 'ssssssssssssssssss',
-    #         :access_token => 'akab-aaaaaaaaaaaaaa'
+    #         :access_token => 'aaaaaaaaaaaaaa'
     #      )
     #   >> request = Net::HTTP::Get.new URI.join(
     #         baseuri.to_s, '/diagnostic-tools/v1/locations'
