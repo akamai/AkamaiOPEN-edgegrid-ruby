@@ -51,12 +51,35 @@ http = Akamai::Edgegrid::HTTP.new(
 http.setup_edgegrid(
     :client_token => 'ccccccccccccccc',
     :client_secret => 'sssssssssssssssssssssss',
-    :access_token => 'aaaaaaaaaaaaaaaaaaaa'
+    :access_token => 'aaaaaaaaaaaaaaaaaaaa',
+    :max_body => 128 * 1024
 )
 
+# example of simple GET request
 request = Net::HTTP::Get.new URI.join(baseuri.to_s, '/diagnostic-tools/v1/locations').to_s
 response = http.request(request)
-print response.body
+puts response.body
+
+# exmaple of POST request with a json formatted request body
+
+require 'json'
+account_id = 'account-id-goes-here'
+start_time = Time.now.to_i * 1000
+end_time = start_time + 86400000
+
+post_request = Net::HTTP::Post.new(
+    URI.join(baseuri.to_s, "/events/v2/#{account_id}/events").to_s,
+    initheader = { 'Content-Type' => 'application/json' }
+)
+
+post_request.body = {
+    "name" => "A test event",
+    "start" => start_time,
+    "end" => end_time
+}.to_json
+
+post_response = http.request(post_request)
+puts post_response.body
 ```
 
 1. First initialize a new EdgegridHTTP object.  This is a subclass of
