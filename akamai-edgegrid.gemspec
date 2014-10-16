@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'akamai-edgegrid'
-  s.version     = '1.0.1'
-  s.date        = '2014-05-14'
+  s.version     = '1.0.2'
+  s.date        = '2014-10-16'
   s.summary     = 'Akamai {OPEN} EdgeGrid Authenticator for net/http'
   s.description = 'Implements the Akamai {OPEN} EdgeGrid Authentication specified by https://developer.akamai.com/introduction/Client_Auth.html'
   s.authors     = ["Jonathan Landis"]
