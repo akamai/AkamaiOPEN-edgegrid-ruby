@@ -2,7 +2,7 @@ edgegrid-ruby
 =============
 [Akamai {OPEN} EdgeGrid Authentication] for ruby ([net/http])
 
-[Akamai {OPEN} EdgeGrid Authentication]: https://developer.akamai.com/stuff/Getting_Started_with_OPEN_APIs/Client_Auth.html
+[Akamai {OPEN} EdgeGrid Authentication]: https://developer.akamai.com/introduction/Client_Auth.html
 [net/http]: http://www.ruby-doc.org/stdlib-1.9.3/libdoc/net/http/rdoc/Net/HTTP.html
 
 This library implements the Akamai {OPEN} EdgeGrid Authentication scheme for

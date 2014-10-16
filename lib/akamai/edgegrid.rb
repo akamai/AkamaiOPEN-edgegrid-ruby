@@ -35,7 +35,7 @@ module Akamai #:nodoc:
     #
     # Akamai::Edgegrid::HTTP provides a subclass of Net::HTTP that adds EdgeGrid
     # authentication support as specified at
-    # https://developer.akamai.com/stuff/Getting_Started_with_OPEN_APIs/Client_Auth.html
+    # https://developer.akamai.com/introduction/Client_Auth.html
     #
     # == Example:
     #   >> require 'akamai/edgegrid'
