@@ -78,8 +78,12 @@ module Akamai #:nodoc:
       # Creates a new Akamai::Edgegrid::HTTP object (takes same options as Net::HTTP)
       def initialize(address, port)
         super(address, port)
-        @use_ssl = true
-        @verify_mode = OpenSSL::SSL::VERIFY_PEER
+        if port == 80
+          @use_ssl = false
+        else
+          @use_ssl = true
+          @verify_mode = OpenSSL::SSL::VERIFY_PEER
+        end
       end
 
       # Creates a signing key based on the secret and timestamp
@@ -115,11 +119,12 @@ module Akamai #:nodoc:
 
       # Returns a string with all data that will be signed
       def make_data_to_sign(request, auth_header)
+        @log.debug("using host #{request['host']}")
         url = URI(request.path)
         data_to_sign = [
           request.method,
           url.scheme,
-          url.host,
+          request.key?('host') ? request['host'] : url.host,
           url.request_uri,
           canonicalize_headers(request),
           make_content_hash(request),
