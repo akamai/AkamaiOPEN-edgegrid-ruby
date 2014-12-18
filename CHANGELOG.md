@@ -1,3 +1,11 @@
+1.0.4
+-----
+* fix bug with nil request.body
+
+1.0.3
+-----
+* support QA environment
+
 1.0.2
 -----
 * Update link to developer site
