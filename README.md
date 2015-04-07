@@ -45,7 +45,7 @@ baseuri = URI('https://akaa-xxxxxxxxx.luna.akamaiapis.net/')
 
 http = Akamai::Edgegrid::HTTP.new(
     address=baseuri.host,
-    post=baseuri.port
+    port=baseuri.port
 )
 
 http.setup_edgegrid(
