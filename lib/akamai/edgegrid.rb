@@ -7,7 +7,7 @@
 #
 # == License
 #
-#   Copyright 2014 Akamai Technologies, Inc. All rights reserved.
+#   Copyright 2014-2015 Akamai Technologies, Inc. All rights reserved.
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ require 'logger'
 require 'securerandom'
 require 'uri'
 require 'net/http'
+require 'inifile'
 
 module Akamai #:nodoc:
   module Edgegrid #:nodoc:
@@ -58,7 +59,7 @@ module Akamai #:nodoc:
     #   => "Hongkong, Hong Kong
     #
     class HTTP < Net::HTTP
-
+      attr_accessor :host, :section
       private
 
       def self.base64_hmac_sha256(data, key)
@@ -77,6 +78,21 @@ module Akamai #:nodoc:
 
       # Creates a new Akamai::Edgegrid::HTTP object (takes same options as Net::HTTP)
       def initialize(address, port)
+      	# If address isn't a URL, it's a section
+      	if !address.include? 'http' 
+      		edgerc_path = File.expand_path('~/.edgerc')
+      	
+      		if File.exist?(edgerc_path) 
+            @section = address
+            file = IniFile.load(edgerc_path)
+      			data = file[address]
+      			address = data["host"] || ""
+            address.gsub!('/','')
+            @host = address
+
+      		end
+      	end
+		
         super(address, port)
         if port == 80
           @use_ssl = false
@@ -164,6 +180,16 @@ module Akamai #:nodoc:
       # * +:max_body+ - Maximum POST body size accepted.  This info is provided by individual APIs (default 2048)
       # * +:debug+ - Enable extra logging (default 'false')
       def setup_edgegrid(opts)
+	        edgerc_path = File.expand_path('~/.edgerc')
+	
+        	if File.exist?(edgerc_path) && @section
+        		file = IniFile.load(edgerc_path)
+        		data = file[@section]
+        		opts[:client_token] ||= data["client_token"]
+        		opts[:client_secret] ||= data["client_secret"]
+        		opts[:access_token] ||= data["access_token"]
+        	end
+
         @client_token = opts[:client_token]
         @client_secret = opts[:client_secret]
         @access_token = opts[:access_token]

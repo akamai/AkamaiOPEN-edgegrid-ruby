@@ -10,5 +10,6 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/akamai-open/AkamaiOPEN-edgegrid-ruby"
   s.license     = 'Apache'
   s.add_development_dependency 'simplecov', '~> 0.7.1'
+  s.add_runtime_dependency 'inifile', '~> 3.0'
   s.required_ruby_version = '>= 1.9'
 end
