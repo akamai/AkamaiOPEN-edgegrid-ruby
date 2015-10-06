@@ -77,19 +77,17 @@ module Akamai #:nodoc:
       public
 
       # Creates a new Akamai::Edgegrid::HTTP object (takes same options as Net::HTTP)
-      def initialize(address, port)
-      	# If address isn't a URL, it's a section
-      	if !address.include? 'http' 
-      		edgerc_path = File.expand_path('~/.edgerc')
+      def initialize(address, port, filename='~/.edgerc', section='default')
+	if filename
+      		edgerc_path = File.expand_path(filename)
       	
       		if File.exist?(edgerc_path) 
-            @section = address
-            file = IniFile.load(edgerc_path)
+            		@section = section
+            		file = IniFile.load(edgerc_path)
       			data = file[address]
       			address = data["host"] || ""
-            address.gsub!('/','')
-            @host = address
-
+            		address.gsub!('/','')
+            		@host = address
       		end
       	end
 		
@@ -180,16 +178,6 @@ module Akamai #:nodoc:
       # * +:max_body+ - Maximum POST body size accepted.  This info is provided by individual APIs (default 2048)
       # * +:debug+ - Enable extra logging (default 'false')
       def setup_edgegrid(opts)
-	        edgerc_path = File.expand_path('~/.edgerc')
-	
-        	if File.exist?(edgerc_path) && @section
-        		file = IniFile.load(edgerc_path)
-        		data = file[@section]
-        		opts[:client_token] ||= data["client_token"]
-        		opts[:client_secret] ||= data["client_secret"]
-        		opts[:access_token] ||= data["access_token"]
-        	end
-
         @client_token = opts[:client_token]
         @client_secret = opts[:client_secret]
         @access_token = opts[:access_token]
@@ -199,6 +187,26 @@ module Akamai #:nodoc:
 
         @max_body = opts[:max_body]
         @max_body ||= 2048
+
+        if opts[:debug]
+          @log = Logger.new(STDERR)
+        else
+          @log = Logger.new('/dev/null')
+        end
+      end
+
+      def setup_from_edgerc(opts)
+	edgerc_path = opts[:filename] || File.expand_path('~/.edgerc')
+
+        if File.exist?(edgerc_path) && @section
+            file = IniFile.load(edgerc_path)
+            data = file[@section]
+            @client_token = data["client_token"]
+            @client_secret =  data["client_secret"]
+            @access_token = data["access_token"]
+	    @max_body = data["max_body"] || 2048
+            @headers_to_sign = opts[:headers_to_sign] || []
+	end
 
         if opts[:debug]
           @log = Logger.new(STDERR)
