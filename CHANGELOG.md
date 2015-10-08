@@ -1,3 +1,7 @@
+1.0.5
+-----
+* add edgerc support (thanks Kirsten)
+
 1.0.4
 -----
 * fix bug with nil request.body
