@@ -93,6 +93,36 @@ puts post_response.body
 3. Finally, use Net::HTTP methods as usual.  EdgegridHTTP will add 
    the property Authentication header to sign your http messages.
 
+Alternate Method using .edgerc
+------
+
+If you want to use the .edgerc method of authentication, similar to the
+python, php and Perl examples, you can find information on how to create
+the file on the developer portal in the Introduction section.  If you 
+are using the .edgerc file the example code is a little different:
+
+```
+require 'akamai/edgegrid'
+require 'net/http'
+require 'uri'
+
+http = Akamai::Edgegrid::HTTP.new(
+        section="default",
+        port=443
+)
+
+baseuri = URI('https://' + http.host)
+
+http.setup_edgegrid({})
+
+request = Net::HTTP::Get.new URI.join(baseuri.to_s, 'diagnostic-tools/v1/locations').to_s
+response = http.request(request)
+puts response.body
+
+```
+
+All other methods should work exactly the same.
+
 Author
 ------
 
