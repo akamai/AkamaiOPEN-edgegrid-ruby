@@ -113,7 +113,7 @@ http = Akamai::Edgegrid::HTTP.new(
 
 baseuri = URI('https://' + http.host)
 
-http.setup_edgegrid({})
+http.setup_from_edgerc({})
 
 request = Net::HTTP::Get.new URI.join(baseuri.to_s, 'diagnostic-tools/v1/locations').to_s
 response = http.request(request)

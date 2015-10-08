@@ -78,19 +78,17 @@ module Akamai #:nodoc:
 
       # Creates a new Akamai::Edgegrid::HTTP object (takes same options as Net::HTTP)
       def initialize(address, port, filename='~/.edgerc', section='default')
-	if filename
-      		edgerc_path = File.expand_path(filename)
-      	
-      		if File.exist?(edgerc_path) 
-            		@section = section
-            		file = IniFile.load(edgerc_path)
-      			data = file[address]
-      			address = data["host"] || ""
-            		address.gsub!('/','')
-            		@host = address
-      		end
-      	end
-		
+        if filename
+          edgerc_path = File.expand_path(filename)
+          if File.exist?(edgerc_path) 
+            @section = section
+            file = IniFile.load(edgerc_path)
+            data = file[address]
+            address = data["host"] || ""
+            address.gsub!('/','')
+            @host = address
+          end
+        end
         super(address, port)
         if port == 80
           @use_ssl = false
@@ -196,17 +194,17 @@ module Akamai #:nodoc:
       end
 
       def setup_from_edgerc(opts)
-	edgerc_path = opts[:filename] || File.expand_path('~/.edgerc')
+        edgerc_path = opts[:filename] || File.expand_path('~/.edgerc')
 
         if File.exist?(edgerc_path) && @section
-            file = IniFile.load(edgerc_path)
-            data = file[@section]
-            @client_token = data["client_token"]
-            @client_secret =  data["client_secret"]
-            @access_token = data["access_token"]
-	    @max_body = data["max_body"] || 2048
-            @headers_to_sign = opts[:headers_to_sign] || []
-	end
+          file = IniFile.load(edgerc_path)
+          data = file[@section]
+          @client_token = data["client_token"]
+          @client_secret =  data["client_secret"]
+          @access_token = data["access_token"]
+          @max_body = data["max_body"] || 2048
+          @headers_to_sign = opts[:headers_to_sign] || []
+        end
 
         if opts[:debug]
           @log = Logger.new(STDERR)
