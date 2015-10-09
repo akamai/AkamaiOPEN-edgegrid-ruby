@@ -77,11 +77,11 @@ module Akamai #:nodoc:
       public
 
       # Creates a new Akamai::Edgegrid::HTTP object (takes same options as Net::HTTP)
-      def initialize(address, port, filename='~/.edgerc', section='default')
+      def initialize(address, port, filename='~/.edgerc')
         if filename
           edgerc_path = File.expand_path(filename)
           if File.exist?(edgerc_path) 
-            @section = section
+	    @section = address
             file = IniFile.load(edgerc_path)
             data = file[address]
             address = data["host"] || ""
