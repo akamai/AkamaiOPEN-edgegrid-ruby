@@ -29,6 +29,16 @@ require 'uri'
 require 'net/http'
 require 'inifile'
 
+def get_host(filename="~/.edgerc", section="default")
+   edgerc_path = File.expand_path(filename)
+   file = IniFile.load(edgerc_path)
+   data = file[section]
+   address = data["host"] || ""
+   address.gsub!('/','')
+   return address
+end
+
+
 module Akamai #:nodoc:
   module Edgegrid #:nodoc:
     
@@ -60,6 +70,7 @@ module Akamai #:nodoc:
     #
     class HTTP < Net::HTTP
       attr_accessor :host, :section
+
       private
 
       def self.base64_hmac_sha256(data, key)
@@ -77,18 +88,8 @@ module Akamai #:nodoc:
       public
 
       # Creates a new Akamai::Edgegrid::HTTP object (takes same options as Net::HTTP)
-      def initialize(address, port, filename='~/.edgerc', section='default')
-        if filename
-          edgerc_path = File.expand_path(filename)
-          if File.exist?(edgerc_path) 
-            @section = section
-            file = IniFile.load(edgerc_path)
-            data = file[address]
-            address = data["host"] || ""
-            address.gsub!('/','')
-            @host = address
-          end
-        end
+      def initialize(address, port)
+	@host = address
         super(address, port)
         if port == 80
           @use_ssl = false
@@ -195,8 +196,8 @@ module Akamai #:nodoc:
 
       def setup_from_edgerc(opts)
         edgerc_path = opts[:filename] || File.expand_path('~/.edgerc')
-
-        if File.exist?(edgerc_path) && @section
+	@section = opts[:section] || "default"
+        if File.exist?(edgerc_path) 
           file = IniFile.load(edgerc_path)
           data = file[@section]
           @client_token = data["client_token"]

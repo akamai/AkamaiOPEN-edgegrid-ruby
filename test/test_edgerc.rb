@@ -38,14 +38,16 @@ class EdgegridTest < MiniTest::Unit::TestCase
   @@testdata['tests'].each do |testcase|
     define_method("test_#{testcase['testName'].downcase.tr(" ", "_")}") do
       baseuri = URI(@@testdata['base_url'])
+      address = get_host("test/sample_edgerc","test_edgerc")
+
       http = Akamai::Edgegrid::HTTP.new(
-        address="",
-        port=443,
-	filename='test/sample_edgerc'
+        address=address,
+        443
       )
 
       http.setup_from_edgerc(
 	:filename => 'test/sample_edgerc',
+	:section  => 'test_edgerc',
         :headers_to_sign => @@testdata['headers_to_sign']
       )
 
