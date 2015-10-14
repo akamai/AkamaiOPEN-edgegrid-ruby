@@ -1,3 +1,7 @@
+1.0.6
+-----
+* fix bug with sections on edgerc (thanks Kirsten)
+
 1.0.5
 -----
 * add edgerc support (thanks Kirsten)
