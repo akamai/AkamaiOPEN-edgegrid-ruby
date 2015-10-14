@@ -89,7 +89,7 @@ module Akamai #:nodoc:
 
       # Creates a new Akamai::Edgegrid::HTTP object (takes same options as Net::HTTP)
       def initialize(address, port)
-	@host = address
+        @host = address
         super(address, port)
         if port == 80
           @use_ssl = false
@@ -196,7 +196,7 @@ module Akamai #:nodoc:
 
       def setup_from_edgerc(opts)
         edgerc_path = opts[:filename] || File.expand_path('~/.edgerc')
-	@section = opts[:section] || "default"
+        @section = opts[:section] || "default"
         if File.exist?(edgerc_path) 
           file = IniFile.load(edgerc_path)
           data = file[@section]
