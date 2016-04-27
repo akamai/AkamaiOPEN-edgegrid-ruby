@@ -56,7 +56,8 @@ http.setup_edgegrid(
 )
 
 # example of simple GET request
-request = Net::HTTP::Get.new URI.join(baseuri.to_s, '/diagnostic-tools/v1/locations').to_s
+request_uri = URI.join(baseuri.to_s, '/diagnostic-tools/v1/locations')
+request = Net::HTTP::Get.new(request_uri)
 response = http.request(request)
 puts response.body
 
