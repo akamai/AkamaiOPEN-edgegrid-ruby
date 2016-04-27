@@ -106,14 +106,11 @@ require 'akamai/edgegrid'
 require 'net/http'
 require 'uri'
 
-http = Akamai::Edgegrid::HTTP.new(
-        section="default",
-        port=443
-)
+http = Akamai::Edgegrid::HTTP.new(get_host(), 443)
 
 baseuri = URI('https://' + http.host)
 
-http.setup_from_edgerc({})
+http.setup_from_edgerc({:section => 'default'})
 
 request = Net::HTTP::Get.new URI.join(baseuri.to_s, 'diagnostic-tools/v1/locations').to_s
 response = http.request(request)
