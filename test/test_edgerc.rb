@@ -32,7 +32,7 @@ require 'json'
 require 'uri'
 require_relative '../lib/akamai/edgegrid'
 
-class EdgegridTest < Minitest::Test
+class EdgeRcTest < Minitest::Test
   @@testdata = JSON.parse(File.read("#{File.dirname(__FILE__)}/testdata.json"))
 
   @@testdata['tests'].each do |testcase|
