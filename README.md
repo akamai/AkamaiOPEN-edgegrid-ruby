@@ -25,7 +25,7 @@ gem install akamai-edgegrid
 * Install from sources (we assume you already have rbenv going)
 
 ```bash
-rbenv local 1.9.3-p545
+rbenv local 2.5.3
 gem install bundler
 bundle install
 rake test
@@ -90,7 +90,7 @@ puts post_response.body
    "Credentials" screen of the Manage APIs UI and the :access_token
    from the "Authorizations" section of the Manage APIs UI.
 
-3. Finally, use Net::HTTP methods as usual.  EdgegridHTTP will add 
+3. Finally, use Net::HTTP methods as usual.  EdgegridHTTP will add
    the property Authentication header to sign your http messages.
 
 Alternate Method using .edgerc

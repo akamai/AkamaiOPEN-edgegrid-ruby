@@ -26,13 +26,13 @@ if ENV['COVERAGE']
   end
 end
 
-require 'minitest/unit'
+require 'minitest'
 require 'minitest/autorun'
 require 'json'
 require 'uri'
 require_relative '../lib/akamai/edgegrid'
 
-class EdgegridTest < MiniTest::Unit::TestCase
+class EdgegridTest < Minitest::Test
   @@testdata = JSON.parse(File.read("#{File.dirname(__FILE__)}/testdata.json"))
 
   @@testdata['tests'].each do |testcase|
@@ -50,7 +50,7 @@ class EdgegridTest < MiniTest::Unit::TestCase
         :max_body => @@testdata['max_body'],
         :headers_to_sign => @@testdata['headers_to_sign']
       )
-     
+
       request_class = Net::HTTP.const_get(testcase['request']['method'].capitalize)
       request = request_class.new URI.join(baseuri.to_s, testcase['request']['path']).to_s
 
@@ -78,7 +78,7 @@ class EdgegridTest < MiniTest::Unit::TestCase
         assert_equal(testcase['failsWithMessage'], err.message)
       end
     end
-  end 
+  end
 
   def test_nonce
     count = 100
@@ -92,7 +92,7 @@ class EdgegridTest < MiniTest::Unit::TestCase
   end
 
   def test_timestamp
-    assert_match /^
+    assert_match(/^
         \d{4}       # year
         [0-1][0-9]  # month
         [0-3][0-9]  # day
@@ -103,6 +103,6 @@ class EdgegridTest < MiniTest::Unit::TestCase
         :
         [0-5][0-9]  # second
         [+]0000     # timezone
-    $/x, Akamai::Edgegrid::HTTP.eg_timestamp() 
+    $/x, Akamai::Edgegrid::HTTP.eg_timestamp())
   end
 end
