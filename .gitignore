@@ -5,3 +5,4 @@ Gemfile.lock
 html/
 .ruby-version
 .ruby-gemset
+.DS_Store
