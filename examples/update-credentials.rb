@@ -33,7 +33,7 @@ http.setup_from_edgerc(
 
 credential_id = 123456
 
-request = Net::HTTP::Put.new URI.join(baseuri.to_s, 'identity-management/v3/api-clients/self/credentials/#{credential_id}').to_s
+request = Net::HTTP::Put.new(URI.join(baseuri.to_s, 'identity-management/v3/api-clients/self/credentials/#{credential_id}').to_s)
 request["Accept"] = "application/json"
 request["Content-Type"] = "application/json"
 request.body = JSON.dump({

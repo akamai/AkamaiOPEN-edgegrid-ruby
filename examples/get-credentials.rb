@@ -26,7 +26,7 @@ http.setup_from_edgerc(
     :section => 'default'
 )
 
-request = Net::HTTP::Get.new URI.join(baseuri.to_s, 'identity-management/v3/api-clients/self/credentials').to_s
+request = Net::HTTP::Get.new(URI.join(baseuri.to_s, 'identity-management/v3/api-clients/self/credentials').to_s)
 request["Accept"] = "application/json"
 
 response = http.request(request)

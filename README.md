@@ -89,7 +89,7 @@ http.setup_from_edgerc(
   :section => 'default'
 )
 
-request = Net::HTTP::Get.new URI.join(baseuri.to_s, 'identity-management/v3/user-profile').to_s
+request = Net::HTTP::Get.new(URI.join(baseuri.to_s, 'identity-management/v3/user-profile').to_s)
 request["Accept"] = "application/json"
 
 response = http.request(request)
@@ -101,11 +101,27 @@ puts response.read_body
 When entering query parameters, you can pass them in the url after a question mark ("?").
 
 ```ruby
-request = Net::HTTP::Get.new URI.join(baseuri.to_s, 'identity-management/v3/user-profile?authGrants=true&notifications=true&actions=true').to_s
-request["Accept"] = "application/json"
+request = Net::HTTP::Get.new(URI.join(baseuri.to_s, 'identity-management/v3/user-profile?authGrants=true&notifications=true&actions=true').to_s)
 
 response = http.request(request)
 puts response.read_body
+```
+
+Or you can pass them dynamically.
+
+```ruby
+baseuri = URI('https://' + http.host)
+params = {
+	:authGrants => true, 
+	:notifications => true,
+	:actions => true
+}
+baseuri.query = URI.encode_www_form(params)
+
+request = Net::HTTP::Get.new URI.join(baseuri.to_s, 'identity-management/v3/user-profile').to_s
+
+response = http.request(request)
+puts response.read_body 
 ```
 
 ### Headers
@@ -121,7 +137,7 @@ baseuri = URI('https://' + http.host)
 
 http.setup_from_edgerc({:section => 'default'})
 
-request = Net::HTTP::Get.new URI.join(baseuri.to_s, 'identity-management/v3/user-profile').to_s
+request = Net::HTTP::Get.new(URI.join(baseuri.to_s, 'identity-management/v3/user-profile').to_s)
 request["Accept"] = "application/json"
 
 response = http.request(request)
@@ -155,7 +171,7 @@ baseuri = URI('https://' + http.host)
 
 http.setup_from_edgerc({:section => 'default'})
 
-request = Net::HTTP::Put.new URI.join(baseuri.to_s, 'identity-management/v3/user-profile/basic-info').to_s
+request = Net::HTTP::Put.new(URI.join(baseuri.to_s, 'identity-management/v3/user-profile/basic-info').to_s)
 request.body = JSON.dump({
   "contactType": "Billing",
   "country": "USA",
