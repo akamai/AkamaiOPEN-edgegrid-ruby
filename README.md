@@ -1,10 +1,10 @@
 # EdgeGrid for Ruby
 
-This library implements an Authentication handler for HTTP requests using the [Akamai EdgeGrid Authentication](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials) scheme for the ruby [net/http](http://www.ruby-doc.org/stdlib-1.9.3/libdoc/net/http/rdoc/Net/HTTP.html) library.
+This library implements an Authentication handler for HTTP requests using the [Akamai EdgeGrid Authentication](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials) scheme for the Ruby [Net/Http](http://www.ruby-doc.org/stdlib-1.9.3/libdoc/net/http/rdoc/Net/HTTP.html) library.
 
 ## Install
 
-This library requires ruby v1.9 or later. To easily install we
+This library requires Ruby v1.9 or later. To easily install we
 recommend using [rbenv](https://github.com/sstephenson/rbenv), [rubygems](http://rubygems.org/), and [bundler](http://bundler.io/).
 
 * Install from rubygems.
@@ -208,7 +208,7 @@ To report an issue or make a suggestion, create a new [GitHub issue](https://git
 
 ## License
 
-Copyright 2023 Akamai Technologies, Inc. All rights reserved.
+Copyright 2024 Akamai Technologies, Inc. All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
 
