@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 #
-# Original author: Jonathan Landis <jlandis@akamai.com>
-#
 # For more information visit https://developer.akamai.com
 #
 #   Copyright 2024 Akamai Technologies, Inc.  All rights reserved.

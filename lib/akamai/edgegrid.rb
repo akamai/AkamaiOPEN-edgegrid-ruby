@@ -1,8 +1,6 @@
 #
 # = akamai/edgegrid.rb
 #
-# Original Author: Jonathan Landis <jlandis@akamai.com>
-#
 # For more information visit https://developer.akamai.com
 #
 # == License
