@@ -2,7 +2,7 @@
 #
 # To run this example:
 #
-# 1. Append the path to your .edgerc file and the section header of the set of credentials to use.
+# 1. Specify the location of your .edgerc file and the section header of the set of credentials to use.
 #
 # The defaults here expect the .edgerc at your home directory and use the credentials under the heading of default.
 #

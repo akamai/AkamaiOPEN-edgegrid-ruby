@@ -6,9 +6,10 @@ This directory contains executable CRUD examples for Akamai API using the EdgeGr
 
 To run any of the files:
 
-1. Append the path to your `.edgerc`. The default is set to the home directory.
+1. Specify the location of your `.edgerc`. The default is set to the home directory.
 2. Provide the section header for the set of credentials you'd like to use. The default is `default`.
-3. Open a Terminal or shell instance and run the .rb file.
+3. For update and delete operations, replace the dummy `credentialId` with your valid `credentialId`.
+4. Open a Terminal or shell instance and run the .rb file.
 
     ```
     $ ruby </examples/<file-name>.rb
@@ -18,12 +19,12 @@ To run any of the files:
 
 The example in each file contains a call to one of the Identity and Access Management (IAM) API endpoints. See the [IAM API reference](https://techdocs.akamai.com/iam-api/reference/api) doc for more information on each of the calls used.
 
-|Sample file|Endpoint|Description|
-|---|---|---|
-|[`get-credentials.rb`](/examples/get-credentials.rb)|`/identity-management/v3/api-clients/self/credentials`|Lists your API client credentials.|
-|[`create-credentials.rb`](/examples/create-credentials.rb)|`/identity-management/v3/api-clients/self/credentials`|Creates a new API client. This is a *quick* client and grants you the default permissions associated with your account.|
-|[`update-credentials.rb`](/examples/update-credentials.rb)|`/identity-management/v3/api-clients/self/credentials/{credentialId}`|Updates your credentials by ID.|
-|[`delete-credentials.rb`](/examples/delete-credentials.rb)|`/identity-management/v3/api-clients/self/credentials/{credentialId}`|Deletes your credentials by ID.|
+| Operation | Method | Endpoint |
+| --- | --- | --- |
+| [List your API client credentials.](/examples/get-credentials.rb) | `GET` | `/identity-management/v3/api-clients/self/credentials`  |
+| [Create new API client credentials.](/examples/create-credentials.rb) <br /> This is a *quick* client and grants you the default permissions associated with your account. | `POST` | `/identity-management/v3/api-clients/self/credentials` |
+| [Update your credentials by ID.](/examples/update-credentials.rb) | `PUT` | `/identity-management/v3/api-clients/self/credentials/{credentialId}` |
+| [Delete your credentials by ID.](/examples/delete-credentials.rb) | `DELETE` | `/identity-management/v3/api-clients/self/credentials/{credentialId}` |
 
 Suggested chained call order:
 
