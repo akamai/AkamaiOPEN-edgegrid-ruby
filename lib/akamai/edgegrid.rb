@@ -39,7 +39,7 @@ module Akamai #:nodoc:
     #         :access_token => 'aaaaaaaaaaaaaa'
     #      )
     #   >> request = Net::HTTP::Get.new URI.join(
-    #         baseuri.to_s, '/diagnostic-tools/v1/locations'
+    #         baseuri.to_s, '/identity-management/v3/user-profile'
     #      ).to_s
     #   >> response = http.request(request)
     #   >> puts JSON.parse(response.body)['locations'][0]
