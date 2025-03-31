@@ -17,7 +17,7 @@ require 'net/http'
 require 'uri'
 
 http = Akamai::Edgegrid::HTTP.new(get_host(), 443)
-https.use_ssl = true
+http.use_ssl = true
 
 baseuri = URI('https://' + http.host)
 

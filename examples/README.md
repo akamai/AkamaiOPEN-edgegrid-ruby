@@ -9,12 +9,15 @@ To run any of the files:
 1. Specify the location of your `.edgerc`. The default is set to the home directory.
 2. Provide the section header for the set of credentials you'd like to use. The default is `default`.
 3. For update and delete operations, replace the dummy `credentialId` with your valid `credentialId`.
+
+   > **Important:** Don't use the credentials you're actively using when running the update (inactivation) and delete operations. Otherwise, you'll block your access to the Akamai APIs.
+
 4. Open a Terminal or shell instance and run the .rb file.
 
     ```
-    $ ruby </examples/<file-name>.rb
+    $ ruby examples/<file-name>.rb
     ```
-    
+
 ## Sample files
 
 The example in each file contains a call to one of the Identity and Access Management (IAM) API endpoints. See the [IAM API reference](https://techdocs.akamai.com/iam-api/reference/api) doc for more information on each of the calls used.

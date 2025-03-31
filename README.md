@@ -30,7 +30,7 @@ We provide authentication credentials through an API client. Requests to the API
 
 1. [Create authentication credentials](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials).
    
-2. Place your credentials in an EdgeGrid resource file, `.edgerc`, under a heading of `[default]` at your local home directory or the home directory of a web-server user.
+2. Place your credentials in an EdgeGrid resource file, `.edgerc`, under a heading of `[default]` at your local home directory.
    
    ```
     [default]
@@ -80,7 +80,7 @@ require 'net/http'
 require 'uri'
 
 http = Akamai::Edgegrid::HTTP.new(get_host(), 443)
-https.use_ssl = true
+http.use_ssl = true
 
 baseuri = URI('https://' + http.host)
 
@@ -208,7 +208,7 @@ To report an issue or make a suggestion, create a new [GitHub issue](https://git
 
 ## License
 
-Copyright 2024 Akamai Technologies, Inc. All rights reserved.
+Copyright 2025 Akamai Technologies, Inc. All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use these files except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
 

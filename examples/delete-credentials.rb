@@ -8,6 +8,8 @@
 #
 # 2. Add the credentialId from the update example to the path. You can only delete inactive credentials. Sending the request on an active set will return a 400. Use the update credentials example for deactivation.
 #
+# **Important:** Don't use the credentials you're actively using when deleting a set of credentials. Otherwise, you'll block your access to the Akamai APIs.
+#
 # 3. Open a Terminal or shell instance and run "ruby examples/delete-credentials.rb".
 #
 # A successful call returns "" null.
@@ -19,7 +21,7 @@ require 'net/http'
 require 'uri'
 
 http = Akamai::Edgegrid::HTTP.new(get_host(), 443)
-https.use_ssl = true
+http.use_ssl = true
 
 baseuri = URI('https://' + http.host)
 
